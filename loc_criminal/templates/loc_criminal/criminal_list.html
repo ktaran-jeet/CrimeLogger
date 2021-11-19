@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="centerstage">
+  {% for criminal in criminal_list %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        {% if criminal.photo != None %}
+          <img src="{{ criminal.photo.url }}" height="180" width="150">
+        {% endif %}
+      </div>
+      <div class="col-sm-4">
+        <h3>{{ criminal.first_name }}  {{ criminal.last_name }}<br>{{ criminal.wanted_level }}</h3>
+        <h5>{{ criminal.nick_name }}</h5>
+        <p1>Obligations::{{ criminal.obligations }}</p1>
+        <br>
+        <p1>PRIZE MONEY:{{ criminal.prize_money }}</p1>
+        <br>
+        <p1>Crime-areas::{{ criminal.crime_areas }}</p1>
+      </div>
+      <div class="col-sm-4">
+        <br><br>
+        <button type="button">SELECT</button>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+{% endblock %}

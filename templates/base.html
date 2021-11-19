@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Star Social</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'simplesocial/CSS/master.css'%}">
+
+    <style>
+
+    /* CSS MAPS */
+
+    .sidenav_map {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+    }
+
+    .sidenav_map a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        top: 75;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+    .sidenav_map a:hover {
+        color: #f1f1f1;
+    }
+
+    .sidenav_map .closebtn {
+        position: absolute;
+        top: 50;
+        right: 0px;
+        font-size: 20px;
+        margin-left: 55px;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav_map {padding-top: 15px;}
+      .sidenav_map a {font-size: 18px;}
+    }
+
+
+    /* CSS MAPS ENDS HERE */
+
+    /*-------------------------- CSS SIDE NAV BAR ---------------------------*/
+    .sidenav {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    margin-top: 40px;
+    overflow-x: hidden;
+    padding-top: 20px;
+    }
+
+    .sidenav a {
+    /* margin-top: 30px; */
+    margin : auto;
+    padding: 18px 5px 5px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    }
+
+    .sidenav a:hover {
+    color: #f1f1f1;
+    }
+
+    .main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+    font-size: 18px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+    }
+
+    @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+    }
+    </style>
+
+  </head>
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-static-top mynav" role="navigation" id="navbar">
+    			<div class="container">
+
+            <a class="navbar-brand mynav" href="{% url 'home' %}">Star Social</a>
+
+    					<ul class="nav navbar-nav navbar-right" >
+    						{% if user.is_authenticated %}
+                      <li><a href="{% url 'posts:create' %}" class="btn btn-simple">Post</a></li>
+                      <!--<li><a href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li>-->
+                      <!--<li><a href="{% url 'groups:create' %}" class="btn btn-simple">Create Group</a></li>-->
+                      <li><a href="{% url 'UserAccounts:logout' %}" class="btn btn-simple">Log out</a></li>
+    						{% else %}
+    						      <li><a href="{% url 'groups:all' %}"class="btn btn-simple">Groups</a></li>
+    						      <li><a href="{% url 'UserAccounts:login' %}" class="btn btn-simple">Log in</a></li>
+    						      <li><a href="{% url 'UserAccounts:signup' %}" class="btn btn-simple">Sign up</a></li>
+    						{% endif %}
+    					</ul>
+
+    			</div>
+    		</nav>
+
+
+
+        <div class="container">
+
+        <div class="sidenav">
+          <a href="#about">User Info</a>
+          <a href="#about">Map</a>
+          <a href="{% url 'loc_criminal:criminal' %}">Locate Criminal</a>
+          <a href="{% url 'posts:create' %}">Report Incident</a>
+          <a href="{% url 'posts:all' %}">Active Incidents</a>
+          <a href="{% url 'groups:all' %}">Review Incidents</a>
+          <a href="{% url 'feedback' %}">Feedback</a>
+          <a href="#contact">About Us</a>
+        </div>
+
+        <div class="main">
+          <div class="container mycontent">
+            {% block content %}
+
+            {% endblock %}
+
+          </div>
+        </div>
+
+
+<canvas id="canvas"></canvas>
+
+
+
+  </body>
+   <script src="{% static "simplesocial/js/master.js"%}" type="text/javascript" ></script>
+</html>
